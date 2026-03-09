@@ -76,8 +76,8 @@ const Risk = ({ prevStep, handleContinue }) => {
       setApiLoading(true);
       setApiError('');
       
-      // API密钥
-      const apiKey = 'a5***************************c3';
+      // 从本地存储获取API密钥
+      const apiKey = 'a55e7a94-5377-4a91-b26b-e463a43d57c3';
       
       // 使用代理地址调用 AWS API
       const completionResponse = await axios.post(
@@ -97,7 +97,7 @@ const Risk = ({ prevStep, handleContinue }) => {
           "temperature": 0.7,
           "max_tokens": 2000,
           "stream": false,
-          "reasoning_effort": "high" // 启用深度推理以获得更准确的风险评估
+          // "reasoning_effort": "high" // 启用深度推理以获得更准确的风险评估
         },
         {
           headers: {
@@ -578,11 +578,12 @@ ${transactionStats.recentTransactions && Array.isArray(transactionStats.recentTr
   
   // 渲染 markdown 内容
   useEffect(() => {
+    console.log('detailsRef.current:', detailsRef.current);
     if (markdownContent && detailsRef.current) {
       try {
         const renderedHtml = md.render(markdownContent);
         detailsRef.current.innerHTML = renderedHtml;
-        
+        console.log('Rendered HTML:', renderedHtml);
         // 添加一些CSS样式来美化markdown渲染效果
         const styleElement = document.createElement('style');
         styleElement.textContent = `
@@ -595,7 +596,7 @@ ${transactionStats.recentTransactions && Array.isArray(transactionStats.recentTr
           .details-content li { margin-bottom: 6px; line-height: 1.5; }
           .details-content strong { color: #2196F3; font-weight: 600; }
           .details-content blockquote { background: #f5f5f5; border-left: 4px solid #2196F3; padding: 12px; margin: 12px 0; font-style: italic; }
-          .details-content code { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 14px; }
+          .details-content code { background: #f0f0f0;color:#000; padding: 2px 6px; border-radius: 3px; font-family: 'Courier New', monospace; font-size: 14px; }
           .details-content pre { background: #f8f8f8; padding: 12px; border-radius: 6px; overflow-x: auto; margin: 12px 0; }
           .details-content pre code { background: none; padding: 0; }
           .details-content table { width: 100%; border-collapse: collapse; margin: 12px 0; }
@@ -617,7 +618,7 @@ ${transactionStats.recentTransactions && Array.isArray(transactionStats.recentTr
         detailsRef.current.innerHTML = '<div style="color: #666;">暂无风险详情内容</div>';
       }
     }
-  }, [markdownContent, md]);
+  }, [markdownContent, md, riskLevel, apiLoading, apiError]);
   
   // 处理重试按钮点击事件
   const handleRetry = async () => {
