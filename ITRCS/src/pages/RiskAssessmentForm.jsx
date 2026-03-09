@@ -29,7 +29,7 @@ const RiskAssessmentForm = ({ nextStep, prevStep }) => {
     // 设置默认地址
     setFormData(prev => ({
       ...prev,
-      paymentAddress: '0x71C7656EC7ab88b098def751B7401B5F6d8976F'
+      paymentAddress: '0x***************************6F'
     }));
     
     // 尝试从localStorage获取商户名称
