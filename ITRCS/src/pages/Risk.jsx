@@ -106,7 +106,6 @@ const Risk = ({ prevStep, handleContinue }) => {
           }
         }
       );
-      console.log('Nova API Response:',completionResponse);
       // 存储返回的风险数据
       setRiskData(completionResponse.data);
       
@@ -578,12 +577,10 @@ ${transactionStats.recentTransactions && Array.isArray(transactionStats.recentTr
   
   // 渲染 markdown 内容
   useEffect(() => {
-    console.log('detailsRef.current:', detailsRef.current);
     if (markdownContent && detailsRef.current) {
       try {
         const renderedHtml = md.render(markdownContent);
         detailsRef.current.innerHTML = renderedHtml;
-        console.log('Rendered HTML:', renderedHtml);
         // 添加一些CSS样式来美化markdown渲染效果
         const styleElement = document.createElement('style');
         styleElement.textContent = `
