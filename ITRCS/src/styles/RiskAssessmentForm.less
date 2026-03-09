@@ -1,0 +1,235 @@
+.payment-form {
+  width: 100%;
+  background: #141E30;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  border-radius: 30px;
+
+  /* 标题栏样式 */
+  .payment-header {
+    background: linear-gradient(180deg, #1E3C72 0%, #2A5298 100%);
+    padding: 10px 24px;
+    border-radius: 16px 16px 0 0;
+
+    .payment-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+      color: #FFFFFF;
+    }
+
+    .payment-subtitle {
+      font-size: 14px;
+      color: #E0E0E0;
+      margin: 0;
+      opacity: 0.9;
+    }
+  }
+
+  /* 表单容器样式 */
+  .form-container {
+    flex: 1;
+    padding: 24px;
+
+    .form-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+      color: #FFFFFF;
+    }
+
+    .form-subtitle {
+      font-size: 14px;
+      color: #B0B0B0;
+      margin: 0 0 10px 0;
+    }
+
+    /* 表单组样式 */
+    .form-group {
+      margin-bottom: 20px;
+
+      .form-label {
+        display: block;
+        font-size: 14px;
+        color: #B0B0B0;
+        margin-bottom: 8px;
+        font-weight: 500;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 12px 16px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        color: #FFFFFF;
+        font-size: 16px;
+        box-sizing: border-box;
+        transition: all 0.2s ease;
+
+        &:focus {
+          outline: none;
+          border-color: #3686FF;
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        &::placeholder {
+          color: #808080;
+        }
+
+        &:read-only {
+          background: rgba(255, 255, 255, 0.03);
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    /* 特殊输入容器样式 */
+    .address-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .form-input {
+        padding-right: 120px;
+      }
+
+      .random-generate-btn {
+        position: absolute;
+        right: 8px;
+        padding: 8px 12px;
+        background: rgba(54, 134, 255, 0.2);
+        border: 1px solid #3686FF;
+        border-radius: 6px;
+        color: #3686FF;
+        font-size: 13px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(54, 134, 255, 0.3);
+          border-color: #5E9BFF;
+        }
+      }
+    }
+
+    .amount-input-container {
+      position: relative;
+      display: flex;
+      align-items: center;
+
+      .form-input {
+        padding-right: 60px;
+      }
+
+      .currency-label {
+        position: absolute;
+        right: 16px;
+        color: #B0B0B0;
+        font-size: 14px;
+        pointer-events: none;
+      }
+    }
+  }
+
+  /* 底部按钮样式 */
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    padding: 10px 24px;
+    .btn {
+      height: 48px;
+      line-height: 1;
+    }
+    .btn-back {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    .btn-primary {
+      flex: 1;
+      background: #3686FF;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: #2979FF;
+        box-shadow: 0 2px 8px rgba(54, 134, 255, 0.3);
+      }
+    }
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .payment-form {
+    border-radius: 20px;
+
+    .payment-header {
+      padding: 8px 20px;
+      border-radius: 16px 16px 0 0;
+
+      .payment-title {
+        font-size: 16px;
+      }
+
+      .payment-subtitle {
+        font-size: 13px;
+      }
+    }
+
+    .form-container {
+      padding: 20px;
+
+      .form-group {
+        margin-bottom: 16px;
+
+        .form-input {
+          font-size: 15px;
+          padding: 10px 14px;
+        }
+      }
+
+      .address-input-container {
+        .random-generate-btn {
+          font-size: 12px;
+          padding: 6px 10px;
+        }
+
+        .form-input {
+          padding-right: 100px;
+        }
+      }
+    }
+
+    .action-buttons {
+      padding: 8px 20px;
+      gap: 10px;
+
+      .btn-back,
+      .btn-primary {
+        font-size: 15px;
+        padding: 12px;
+      }
+    }
+  }
+}

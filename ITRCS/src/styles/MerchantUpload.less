@@ -1,0 +1,881 @@
+// Walrus内容管理页面样式
+
+// 深色主题变量
+@bg-primary: #141414;
+@bg-secondary: #1e1e1e;
+@bg-tertiary: #2d2d2d;
+@text-primary: #e0e0e0;
+@text-secondary: #a0a0a0;
+@accent-primary: #6366f1;
+@accent-secondary: #818cf8;
+@success-color: #10b981;
+@error-color: #ef4444;
+@border-color: #3d3d3d;
+@shadow-color: rgba(0, 0, 0, 0.5);
+
+// 页面容器
+.walrus-content-manager {
+  min-height: 100vh;
+  background-color: @bg-primary;
+  color: @text-primary;
+  padding: 2rem 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+// 页面标题
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, @accent-primary, @accent-secondary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  p {
+    font-size: 1.1rem;
+    color: @text-secondary;
+    max-width: 600px;
+    margin: 0 auto 12px;
+  }
+  
+  // 钱包状态样式
+  .wallet-status {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 8px;
+    background-color: @bg-secondary;
+    font-size: 14px;
+    margin-top: 8px;
+  }
+  
+  .status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 8px;
+  }
+  
+  .status-indicator.connected {
+    background-color: #4CAF50;
+  }
+  
+  .status-indicator.disconnected {
+    background-color: #F44336;
+  }
+  
+  .wallet-address {
+    color: @text-primary;
+  }
+  
+  .wallet-message {
+    color: @text-secondary;
+    font-weight: 500;
+  }
+}
+
+// 左右布局容器
+.content-layout {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  
+  // 响应式设计
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+// 通用面板样式
+.panel {
+  background-color: @bg-secondary;
+  border-radius: 1rem;
+  border: 1px solid @border-color;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    box-shadow: 0 8px 30px @shadow-color;
+    transform: translateY(-2px);
+  }
+}
+
+// 面板头部
+.panel-header {
+  padding: 1.5rem 2rem;
+  background-color: @bg-tertiary;
+  border-bottom: 1px solid @border-color;
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    color: @text-primary;
+  }
+}
+
+// 面板内容
+.panel-body {
+  padding: 2rem;
+}
+
+// 上传模式切换按钮样式
+.mode-switch {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+  background-color: @bg-tertiary;
+  border-radius: 1rem;
+  padding: 0.25rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.15);
+  
+  .mode-btn {
+    flex: 1;
+    padding: 0.9rem 1.25rem;
+    background-color: transparent;
+    border: none;
+    border-radius: 0.75rem;
+    color: @text-secondary;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+    
+    &.active {
+      color: white;
+      background: linear-gradient(135deg, @accent-primary, @accent-secondary);
+      box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+      transform: translateY(-1px);
+    }
+    
+    &:hover:not(.active) {
+      color: @accent-primary;
+      background-color: rgba(99, 102, 241, 0.1);
+    }
+    
+    &:active:not(.active) {
+      transform: scale(0.98);
+    }
+  }
+}
+
+// 上传类型选择器样式
+.upload-type-selector {
+  margin-bottom: 1.5rem;
+  
+  label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+    color: @text-primary;
+    font-size: 1rem;
+  }
+  
+  .radio-group {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .radio-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: @text-primary;
+    
+    input[type="radio"] {
+      width: 1rem;
+      height: 1rem;
+      accent-color: @accent-primary;
+      margin: 0;
+    }
+    
+    span {
+      user-select: none;
+      transition: color 0.2s ease;
+    }
+    
+    &:hover span {
+      color: @accent-primary;
+    }
+  }
+}
+
+// 商户信息字段样式
+.merchant-info-fields {
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  background-color: @bg-tertiary;
+  border-radius: 0.75rem;
+  border: 1px solid @border-color;
+
+  .param-group {
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.75rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: @text-primary;
+    }
+
+    .param-input {
+      width: 90%;
+      padding: 0.9rem 1.25rem;
+      border: 2px solid @border-color;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      background-color: @bg-secondary;
+      color: @text-primary;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: none;
+        border-color: @accent-primary;
+        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+        background-color: darken(@bg-secondary, 3%);
+      }
+
+      &:hover:not(:focus) {
+        border-color: @accent-secondary;
+      }
+
+      &::placeholder {
+        color: @text-secondary;
+      }
+    }
+  }
+}
+
+// 商户选择器样式
+.merchant-selector {
+  margin-bottom: 1.5rem;
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: @text-primary;
+  }
+  
+  .merchant-select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: @bg-tertiary;
+    border: 1px solid @border-color;
+    border-radius: 0.5rem;
+    color: @text-primary;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    
+    &:focus {
+      outline: none;
+      border-color: @accent-primary;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+  }
+  
+  .loading-merchants,
+  .merchants-error {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .loading-merchants {
+    background-color: @bg-tertiary;
+    color: @text-secondary;
+  }
+  
+  .merchants-error {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: @error-color;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+  }
+}
+
+// 输入容器
+.input-container {
+  margin-bottom: 1.5rem;
+  
+  .large-input {
+    width: 94%;
+    min-height: 300px;
+    padding: 1rem;
+    background-color: @bg-tertiary;
+    border: 1px solid @border-color;
+    border-radius: 0.5rem;
+    color: @text-primary;
+    font-size: 1rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+    
+    &::placeholder {
+      color: @text-secondary;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: @accent-primary;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+  }
+}
+
+// 上传参数样式
+.upload-params {
+  margin-bottom: 2rem;
+  
+  .param-group {
+    margin-bottom: 1.5rem;
+    padding: 1.25rem;
+    background-color: @bg-tertiary;
+    border-radius: 0.75rem;
+    border: 1px solid @border-color;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      border-color: @accent-secondary;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+    }
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: @text-primary;
+    font-size: 1.05rem;
+  }
+  
+  .param-input {
+    width: 90%;
+    padding: 0.9rem 1.25rem;
+    background-color: @bg-secondary;
+    border: 2px solid @border-color;
+    border-radius: 0.75rem;
+    color: @text-primary;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    position: relative;
+    
+    &::placeholder {
+      color: @text-secondary;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: @accent-primary;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+      background-color: darken(@bg-secondary, 3%);
+    }
+    
+    &:hover:not(:focus) {
+      border-color: @accent-secondary;
+    }
+    
+    // 数字输入框特殊样式（适用于存储周期）
+    &[type="number"] {
+      appearance: none;
+      -moz-appearance: textfield;
+      
+      &::-webkit-outer-spin-button,
+      &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      
+      // 添加自定义加减按钮样式提示
+      &::after {
+        content: '点击输入或使用上下箭头调整';
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 0.8rem;
+        color: transparent;
+        transition: color 0.2s ease;
+      }
+      
+      &:focus::after {
+        color: @text-secondary;
+      }
+    }
+  }
+  
+  .param-hint {
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: @text-secondary;
+    padding-left: 0.25rem;
+    border-left: 3px solid @accent-secondary;
+  }
+}
+
+// 文件上传区域样式
+.file-upload-group {
+  margin-bottom: 2rem;
+  
+  .file-input {
+    display: none;
+  }
+  
+  .file-upload-label {
+    display: block;
+    padding: 2.5rem 2rem;
+    border: 3px dashed @border-color;
+    border-radius: 1rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: @bg-tertiary;
+    color: @text-secondary;
+    position: relative;
+    overflow: hidden;
+    font-size: 1.1rem;
+    min-height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .file-upload-label:hover {
+    border-color: @accent-primary;
+    background-color: darken(@bg-tertiary, 5%);
+    color: @accent-primary;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.2);
+  }
+  
+  .file-info {
+    margin-top: 1.25rem;
+    padding: 1rem 1.5rem;
+    background-color: @bg-tertiary;
+    border-radius: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-left: 4px solid @accent-primary;
+    animation: slideIn 0.3s ease;
+    
+    span {
+      color: @text-primary;
+      font-size: 0.95rem;
+      
+      &:first-child {
+        font-weight: 600;
+        color: @accent-primary;
+      }
+    }
+  }
+}
+
+// 查询输入组
+.query-input-group {
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  
+  .query-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    background-color: @bg-tertiary;
+    border: 1px solid @border-color;
+    border-radius: 0.5rem;
+    color: @text-primary;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    
+    &::placeholder {
+      color: @text-secondary;
+    }
+    
+    &:focus {
+      outline: none;
+      border-color: @accent-primary;
+      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+  }
+}
+
+// 按钮样式
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+  
+  &:active::after {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+// 上传按钮
+.btn-upload {
+  background: linear-gradient(135deg, @accent-primary, @accent-secondary);
+  color: white;
+  padding: 0.85rem 1.75rem;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-radius: 0.75rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  z-index: 1;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, @accent-secondary, @accent-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    
+    &::before {
+      opacity: 1;
+    }
+  }
+  
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(99, 102, 241, 0.4);
+  }
+}
+
+// 查询按钮
+.btn-query {
+  background: linear-gradient(135deg, @accent-primary, @accent-secondary);
+  color: white;
+  white-space: nowrap;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+  }
+}
+
+// 清空按钮
+.btn-clear {
+  background-color: transparent;
+  border: 1px solid @border-color;
+  color: @text-secondary;
+  
+  &:hover:not(:disabled) {
+    background-color: @bg-tertiary;
+    color: @text-primary;
+  }
+}
+
+// 下载按钮
+.btn-download {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+  color: white;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+  }
+}
+
+// 帮助按钮
+.btn-help {
+  background: linear-gradient(135deg, #14b8a6, #0d9488);
+  color: white;
+  
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(20, 184, 166, 0.4);
+  }
+}
+
+// 操作按钮组
+.action-buttons {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  align-items: center;
+  
+  // 添加按钮点击波纹效果的容器
+  position: relative;
+  overflow: visible;
+  
+  // 响应式调整
+  @media (max-width: 640px) {
+    flex-direction: column;
+    
+    .btn {
+      width: 100%;
+    }
+  }
+}
+
+// 成功消息
+.success-message {
+  background-color: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeInUp 0.5s ease;
+  transform: translateY(0);
+  opacity: 1;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.1);
+  
+  .success-icon {
+    font-size: 1.25rem;
+    color: @success-color;
+    animation: pulse 2s infinite;
+  }
+  
+  p {
+    margin: 0;
+    color: @success-color;
+    font-weight: 500;
+  }
+  
+  .blob-id {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    
+    .label {
+      color: @text-secondary;
+    }
+    
+    code {
+      background-color: @bg-tertiary;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+      font-family: 'Consolas', 'Monaco', monospace;
+      word-break: break-all;
+      color: @accent-secondary;
+    }
+  }
+  
+  &:hover {
+    background-color: rgba(16, 185, 129, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
+  }
+}
+
+// 错误消息
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.75rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: fadeInUp 0.5s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.1);
+  
+  .error-icon {
+    font-size: 1.25rem;
+    color: @error-color;
+  }
+  
+  p {
+    margin: 0;
+    color: @error-color;
+    font-weight: 500;
+  }
+  
+  &:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+  }
+}
+
+// 查询结果
+.query-result {
+  background-color: @bg-tertiary;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  animation: slideIn 0.3s ease;
+  
+  .result-header {
+    margin-bottom: 1rem;
+    
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 0;
+      color: @text-primary;
+    }
+  }
+  
+  .result-info {
+    .result-item {
+      margin-bottom: 1rem;
+      
+      .label {
+        color: @text-secondary;
+        font-weight: 500;
+        margin-right: 0.5rem;
+      }
+      
+      code {
+        background-color: @bg-secondary;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-family: 'Consolas', 'Monaco', monospace;
+        word-break: break-all;
+        color: @accent-secondary;
+      }
+      
+      .content-display {
+        background-color: @bg-secondary;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid @border-color;
+        font-family: 'Consolas', 'Monaco', monospace;
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow-x: auto;
+        max-height: 300px;
+        margin: 0.5rem 0 0 0;
+        color: @text-primary;
+      }
+      
+      .binary-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .binary-indicator {
+        color: @text-secondary;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+// 动画效果
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// 表单元素通用动画
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: @bg-tertiary;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: @border-color;
+  border-radius: 4px;
+  
+  &:hover {
+    background: #555;
+  }
+}

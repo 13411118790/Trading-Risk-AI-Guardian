@@ -1,0 +1,238 @@
+// 全局样式重置和主题设置
+.app-layout {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #0a1428 0%, #0c1a35 50%, #0a1428 100%);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+/* 头部导航样式 */
+.main-header {
+  background: rgba(10, 20, 40, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0 24px;
+
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+        color: #00b4ff;
+      }
+
+      .logo-text {
+        font-size: 18px;
+        font-weight: 600;
+        color: #00b4ff;
+      }
+    }
+
+    .header-nav {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+
+      .nav-link {
+        color: rgba(255, 255, 255, 0.8);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px 16px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        position: relative;
+
+        &:hover {
+          color: #ffffff;
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+
+      .ai-link {
+        background: rgba(0, 180, 255, 0.1);
+        border: 1px solid #00b4ff;
+        padding: 6px 12px;
+        border-radius: 16px;
+        font-size: 12px;
+        font-weight: 500;
+
+        &:hover {
+          background: rgba(0, 180, 255, 0.2);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+/* 流程指示器样式 */
+.process-indicator {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+/* 覆盖 Arco Steps 组件样式以匹配主题 */
+:global(.arco-steps-horizontal) {
+  width: 100%;
+}
+:global(.arco-steps-item-tail) {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+:global(.arco-steps-item-icon) {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global(.arco-steps-item-active .arco-steps-item-icon) {
+  background-color: #00b4ff;
+  border-color: #00b4ff;
+  color: #ffffff;
+}
+
+:global(.arco-steps-item-finish .arco-steps-item-icon) {
+  background-color: #52c41a;
+  border-color: #52c41a;
+  color: #ffffff;
+}
+
+:global(.arco-steps-item-tail::before) {
+  background-color: #00b4ff;
+}
+
+:global(.arco-steps-item-content) {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:global(.arco-steps-item-active .arco-steps-item-content) {
+  color: #ffffff;
+}
+
+:global(.arco-steps-item-description) {
+  color: rgba(0, 180, 255, 0.8);
+}
+
+:global(.arco-steps-icon) {
+  font-weight: 600;
+}
+
+/* 主内容区域 */
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .content-placeholder {
+    width: 100%;
+    max-width: 600px;
+    background: linear-gradient(135deg, rgba(12, 26, 53, 0.95), rgba(19, 36, 71, 0.95));
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+
+    .placeholder-text {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 18px;
+    }
+  }
+}
+
+/* 底部样式 */
+.main-footer {
+  background: rgba(10, 20, 40, 0.95);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 24px;
+
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      margin: 0;
+    }
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .main-header .header-content {
+    padding: 0 16px;
+
+    .header-nav {
+      gap: 16px;
+
+      .nav-link {
+        font-size: 12px;
+      }
+
+      .ai-link {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .main-content {
+    padding: 24px 16px;
+
+    .content-placeholder {
+      border-radius: 16px;
+      min-height: 300px;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .main-header .header-content {
+    flex-direction: column;
+    height: auto;
+    padding: 12px 16px;
+    gap: 12px;
+
+    .logo .logo-text {
+      font-size: 16px;
+    }
+  }
+
+  .process-indicator {
+    padding: 16px 0;
+  }
+
+  .main-content .content-placeholder {
+    min-height: 250px;
+  }
+}

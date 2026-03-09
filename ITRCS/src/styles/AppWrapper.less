@@ -1,0 +1,241 @@
+.app-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 16px;
+
+  /* 标题栏样式 */
+  .merchant-header {
+    background: linear-gradient(180deg, #1E3C72 0%, #2A5298 100%);
+    padding: 10px 24px;
+    margin-bottom: 0;
+    border-radius: 16px 16px 0 0;
+
+    .merchant-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 4px 0;
+      color: #FFFFFF;
+    }
+
+    .merchant-subtitle {
+      font-size: 14px;
+      color: #E0E0E0;
+      margin: 0;
+      opacity: 0.9;
+    }
+  }
+
+  /* 商户选择部分样式 */
+  .merchant-selection {
+    padding: 18px;
+
+    .section-title {
+      font-size: 16px;
+      margin: 0 0 4px 0;
+      color: #FFFFFF;
+    }
+
+    .section-subtitle {
+      font-size: 14px;
+      color: #B0B0B0;
+      margin: 0 0 10px 0;
+    }
+  }
+
+  /* 加载状态样式 */
+  .loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: #FFFFFF;
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      border-top-color: #3686FF;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: 16px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: #E0E0E0;
+    }
+  }
+
+  /* 错误状态样式 */
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: #FFFFFF;
+
+    .error-message {
+      margin: 0 0 20px 0;
+      font-size: 16px;
+      color: #FF4D4F;
+      text-align: center;
+    }
+  }
+
+  /* 空状态样式 */
+  .empty-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    color: #FFFFFF;
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: #B0B0B0;
+    }
+  }
+
+  /* 动画效果 */
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* 商户选择部分样式 - 继续 */
+  .merchant-selection {
+    padding: 18px;
+
+    /* 商户列表样式 */
+    .merchant-list {
+      max-height: 400px;
+      overflow: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .merchant-item {
+        display: flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        padding: 16px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+        }
+
+        &.selected {
+          background: rgba(54, 134, 255, 0.1);
+          border-color: #3686FF;
+        }
+
+        .merchant-icon {
+          font-size: 24px;
+          margin-right: 16px;
+          width: 40px;
+          height: 40px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(255, 255, 255, 0.1);
+          border-radius: 8px;
+        }
+
+        .merchant-info {
+          flex: 1;
+
+          .merchant-name {
+            font-size: 16px;
+            font-weight: 500;
+            margin: 0 0 2px 0;
+            color: #FFFFFF;
+          }
+
+          .merchant-desc {
+            font-size: 13px;
+            color: #B0B0B0;
+            margin: 0;
+          }
+        }
+
+        .merchant-check {
+          position: absolute;
+          right: 16px;
+        }
+      }
+    }
+  }
+
+  /* 底部按钮样式 */
+  .action-buttons {
+    display: flex;
+    gap: 12px;
+    padding: 10px 24px;
+
+    .btn {
+      flex: 1;
+      height: 48px;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 1;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.1);
+      color: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:hover {
+        color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    .btn-primary {
+      background: #3686FF;
+      color: #FFFFFF;
+
+      &:hover {
+        background: #2979FF;
+        box-shadow: 0 2px 8px rgba(54, 134, 255, 0.3);
+      }
+    }
+  }
+}
+
+/* 滚动条样式 */
+.merchant-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.merchant-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+.merchant-list::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+.merchant-list::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
