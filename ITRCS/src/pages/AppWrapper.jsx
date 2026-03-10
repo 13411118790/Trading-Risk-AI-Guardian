@@ -24,11 +24,9 @@ const AppWrapper = ({ nextStep, prevStep }) => {
       try {
         const merchantData = await getAllMerchantInfo(wallet);
         
-        // 过滤掉前4条测试数据
-        const filteredMerchants = merchantData.slice(4);
-        setMerchants(filteredMerchants);
+        setMerchants(merchantData);
         // 如果有商户数据，默认选中第一个
-        if (filteredMerchants.length > 0) {
+        if (merchantData.length > 0) {
           setSelectedMerchant(0);
         }
       } catch (err) {
@@ -98,10 +96,8 @@ const AppWrapper = ({ nextStep, prevStep }) => {
               setMerchants([]);
               setLoading(true);
                 getAllMerchantInfo(wallet).then(merchantData => {
-                  // 过滤掉前4条测试数据
-                  const filteredMerchants = merchantData.slice(4);
-                  setMerchants(filteredMerchants);
-                  if (filteredMerchants.length > 0) {
+                  setMerchants(merchantData);
+                  if (merchantData.length > 0) {
                     setSelectedMerchant(0);
                   }
                 }).catch(err => {
