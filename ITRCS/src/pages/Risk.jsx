@@ -77,7 +77,7 @@ const Risk = ({ prevStep, handleContinue }) => {
       setApiError('');
       
       // 从本地存储获取API密钥
-      const apiKey = 'a55e7a94-5377-4a91-b26b-e463a43d57c3';
+      const apiKey = 'a5********************c3';
       
       // 使用代理地址调用 AWS API
       const completionResponse = await axios.post(
